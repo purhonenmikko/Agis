@@ -10,12 +10,11 @@ import RPi.GPIO as GPIO
 import time
 import sys
 
-import plot
-
+GPIO.setmode(GPIO.BCM)
 CLK = 11
 MISO = 9
 MOSI = 10
-CS = 11
+CS = 8
 
 
 def setupSpiPins(clkPin, misoPin, mosiPin, csPin):
@@ -107,9 +106,9 @@ if __name__ == '__main__':
 
         while True:
             val = readAdc(0, CLK, MISO, MOSI, CS)
-            print("ADC Result: ", str(val))
-            write_data(val)
-            time.sleep(5)
+            print("ADC Result: %s" %bin(int(val)))
+            #write_data(val)
+            time.sleep(1)
     except KeyboardInterrupt:
         GPIO.cleanup()
         sys.exit(0)
